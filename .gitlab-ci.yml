@@ -2,6 +2,7 @@
 # This is the Gradle build system for JVM applications
 # https://gradle.org/
 # https://github.com/gradle/gradle
+image: openjdk:8u282-jdk-slim
 
 default:
   tags:
