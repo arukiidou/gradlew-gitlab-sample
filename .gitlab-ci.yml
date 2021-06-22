@@ -33,3 +33,8 @@ test:
     paths:
       - build
       - .gradle
+  artifacts:
+    paths:
+      - ./build/reports/
+    reports:
+      junit: ./build/test-results/
