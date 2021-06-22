@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static List<Integer> getList() throws SQLException {
-        final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
+        final String URL = "jdbc:oracle:thin:@192.168.1.4:1521:XE";
         final String USER = "system";
         final String PASS = "oracle";
         final String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";
