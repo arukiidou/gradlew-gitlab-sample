@@ -4,6 +4,9 @@
 # https://github.com/gradle/gradle
 image: openjdk:8u282-jdk-slim
 
+include:
+  - template: Code-Quality.gitlab-ci.yml
+
 default:
   tags:
     - shell
@@ -16,6 +19,10 @@ variables:
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
+
+stages:
+  - build
+  - test
 
 build:
   stage: build
@@ -41,3 +48,11 @@ test:
       - ./build/reports/
     reports:
       junit: ./build/test-results/test/TEST-MainTest.xml
+
+code_quality:
+  stage: test
+  services:            # Shut off Docker-in-Docker
+  tags:
+    - cq-sans-dind     # Set this job to only run on our new specialized runner
+  artifacts:
+    paths: [gl-code-quality-report.json]
