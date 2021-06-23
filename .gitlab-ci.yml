@@ -54,5 +54,8 @@ code_quality:
   services:            # Shut off Docker-in-Docker
   tags:
     - cq-sans-dind     # Set this job to only run on our new specialized runner
+  after_script:
+    - ls -l
+    - cat gl-code-quality-report.json
   artifacts:
     paths: [gl-code-quality-report.json]
