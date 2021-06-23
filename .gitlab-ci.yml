@@ -55,7 +55,7 @@ code_quality:
   tags:
     - cq-sans-dind     # Set this job to only run on our new specialized runner
   after_script:
-    - find gl-code-quality-report -type f
+    - ls -l
     - cat gl-code-quality-report.json
   artifacts:
     paths: [gl-code-quality-report.json]
