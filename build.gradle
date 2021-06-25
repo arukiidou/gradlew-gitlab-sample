@@ -11,9 +11,10 @@ version '1.1-SNAPSHOT'
 repositories {
     mavenCentral()
 
-    // package registry用
+    // 環境変数は、Gitlab-Ci上では自動で設定される。ローカルでは、システム環境変数にそれぞれ埋め込むこと。
+    // package registry用(同一プロジェクトのパッケージに登録)
     maven {
-        url URI.create("http://192.168.1.4:18080/api/v4".concat("/projects/2/packages/maven"))
+        url URI.create(String.join("", System.getenv("CI_API_V4_URL"), "/projects/", System.getenv("CI_PROJECT_ID"), "/packages/maven"))
         allowInsecureProtocol true
         name "GitLab"
         credentials(HttpHeaderCredentials) {
@@ -36,7 +37,7 @@ test {
     useJUnitPlatform()
 }
 
-// 以下、package registryを使用しないならば不要
+// 以下、package registry用(同一プロジェクトのパッケージに登録)。package registryを使用しないならば不要
 publishing {
     publications {
         library(MavenPublication) {
@@ -45,7 +46,7 @@ publishing {
     }
     repositories {
         maven {
-            url URI.create(System.getenv("CI_API_V4_URL").concat("/projects/2/packages/maven"))
+            url URI.create(String.join("", System.getenv("CI_API_V4_URL"), "/projects/", System.getenv("CI_PROJECT_ID"), "/packages/maven"))
             allowInsecureProtocol true
             name "GitLab"
             credentials(HttpHeaderCredentials) {
