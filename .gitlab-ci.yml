@@ -74,3 +74,4 @@ spotbugs-sast:
     paths: [gl-sast-report.json]
     reports:
       sast: gl-sast-report.json
+
