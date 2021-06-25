@@ -6,6 +6,7 @@ image: openjdk:8u282-jdk-slim
 
 include:
   - template: Code-Quality.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
 
 default:
   tags:
@@ -15,6 +16,7 @@ default:
 # runtime for each build is more reliable since the runtime is completely
 # isolated from any previous builds.
 variables:
+  SAST_EXCLUDED_ANALYZERS: "bandit,brakeman,eslint,flawfinder,gosec,kubesec,nodejs-scan,phpcs-security-audit,pmd-apex,security-code-scan,sobelow"
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
 before_script:
