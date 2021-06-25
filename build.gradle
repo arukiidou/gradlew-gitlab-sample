@@ -46,6 +46,7 @@ publishing {
     repositories {
         maven {
             url URI.create(System.getenv("CI_API_V4_URL").concat("/projects/2/packages/maven"))
+            allowInsecureProtocol true
             name "GitLab"
             credentials(HttpHeaderCredentials) {
                 name = 'Job-Token'
