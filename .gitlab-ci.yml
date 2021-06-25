@@ -18,9 +18,10 @@ default:
 variables:
   SAST_EXCLUDED_ANALYZERS: "bandit,brakeman,eslint,flawfinder,gosec,kubesec,nodejs-scan,phpcs-security-audit,pmd-apex,security-code-scan,sobelow"
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  GRADLE_USER_HOME: ".gradle"
 
-before_script:
-  - export GRADLE_USER_HOME=`pwd`/.gradle
+# before_script:
+#   - export GRADLE_USER_HOME=`pwd`/.gradle
 
 stages:
   - build
@@ -61,3 +62,10 @@ code_quality:
     - cat gl-code-quality-report.json
   artifacts:
     paths: [gl-code-quality-report.json]
+
+spotbugs-sast:
+  dependencies:
+    - build
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
