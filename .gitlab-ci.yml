@@ -62,6 +62,8 @@ code_quality:
     - cat gl-code-quality-report.json
   artifacts:
     paths: [gl-code-quality-report.json]
+    reports:
+      codequality: gl-sast-report.json
 
 spotbugs-sast:
   tags:
