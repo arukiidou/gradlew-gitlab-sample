@@ -37,7 +37,7 @@ public class Main {
         return pds;
     }
 
-    public static List<Integer> getList(){
+    public static List<Integer> getList() {
         System.out.println("----------------start--------------");
         PoolDataSource pds = getPoolDataSource();
 
@@ -59,6 +59,6 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(getList().stream().collect(Collectors.summarizingInt(e->e)));
+        System.out.println(getList().stream().collect(Collectors.summarizingInt(e -> e)));
     }
 }
