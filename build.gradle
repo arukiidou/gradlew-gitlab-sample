@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 
     maven {
-        url "${CI_API_V4_URL}/projects/2/packages/maven"
+        url "http://192.168.1.4:18080/api/v4/projects/2/packages/maven"
         name "GitLab"
         credentials(HttpHeaderCredentials) {
             name = 'Job-Token'
