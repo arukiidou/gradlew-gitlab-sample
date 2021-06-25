@@ -18,7 +18,7 @@ default:
 variables:
   SAST_EXCLUDED_ANALYZERS: "bandit,brakeman,eslint,flawfinder,gosec,kubesec,nodejs-scan,phpcs-security-audit,pmd-apex,security-code-scan,sobelow"
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  GRADLE_USER_HOME: ".gradle"
+  GRADLE_USER_HOME: "${CI_PROJECT_DIR}/.gradle"
 
 # before_script:
 #   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -64,6 +64,8 @@ code_quality:
     paths: [gl-code-quality-report.json]
 
 spotbugs-sast:
+  tags:
+    - cq-sans-dind     # Set this job to only run on our new specialized runner
   dependencies:
     - build
   artifacts:
