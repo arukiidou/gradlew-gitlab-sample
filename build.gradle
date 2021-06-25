@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
 
 group 'arukiidou.com'
@@ -8,12 +7,6 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-
-    publications {
-        library(MavenPublication) {
-            from components.java
-        }
-    }
 
     maven {
         url "${CI_API_V4_URL}/projects/2/packages/maven"
