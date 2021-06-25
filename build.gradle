@@ -12,17 +12,18 @@ repositories {
     mavenCentral()
 
     // package registry用
-//    maven {
-//        url "http://192.168.1.4:18080/api/v4/projects/2/packages/maven"
-//        name "GitLab"
-//        credentials(HttpHeaderCredentials) {
-//            name = 'Job-Token'
-//            value = System.getenv("CI_JOB_TOKEN")
-//        }
-//        authentication {
-//            header(HttpHeaderAuthentication)
-//        }
-//    }
+    maven {
+        url URI.create("http://192.168.1.4:18080/api/v4/projects/2/packages/maven")
+        allowInsecureProtocol true
+        name "GitLab"
+        credentials(HttpHeaderCredentials) {
+            name = 'Job-Token'
+            value = System.getenv("CI_JOB_TOKEN")
+        }
+        authentication {
+            header(HttpHeaderAuthentication)
+        }
+    }
 }
 
 dependencies {
@@ -44,7 +45,7 @@ publishing {
     }
     repositories {
         maven {
-            url "http://192.168.1.4:18080/api/v4/projects/2/packages/maven"
+            url URI.create(System.getenv("CI_API_V4_URL").concat("/projects/2/packages/maven"))
             name "GitLab"
             credentials(HttpHeaderCredentials) {
                 name = 'Job-Token'
