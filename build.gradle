@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+
+    // package registry用
     id 'maven-publish'
 }
 
@@ -9,19 +11,31 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 
-    maven {
-        url "http://192.168.1.4:18080/api/v4/projects/2/packages/maven"
-        name "GitLab"
-        credentials(HttpHeaderCredentials) {
-            name = 'Job-Token'
-            value = System.getenv("CI_JOB_TOKEN")
-        }
-        authentication {
-            header(HttpHeaderAuthentication)
-        }
-    }
+    // package registry用
+//    maven {
+//        url "http://192.168.1.4:18080/api/v4/projects/2/packages/maven"
+//        name "GitLab"
+//        credentials(HttpHeaderCredentials) {
+//            name = 'Job-Token'
+//            value = System.getenv("CI_JOB_TOKEN")
+//        }
+//        authentication {
+//            header(HttpHeaderAuthentication)
+//        }
+//    }
 }
 
+dependencies {
+    implementation "com.oracle.database.jdbc:ojdbc6:11.2.0.4"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// 以下、package registryを使用しないならば不要
 publishing {
     publications {
         library(MavenPublication) {
@@ -41,14 +55,4 @@ publishing {
             }
         }
     }
-}
-
-dependencies {
-    implementation "com.oracle.database.jdbc:ojdbc6:11.2.0.4"
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}
-
-test {
-    useJUnitPlatform()
 }
