@@ -63,7 +63,7 @@ code_quality:
   artifacts:
     paths: [gl-code-quality-report.json]
     reports:
-      codequality: gl-sast-report.json
+      codequality: gl-code-quality-report.json
 
 spotbugs-sast:
   tags:
